@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Turnstar Holdings Limited · Rental Portfolio</title>
+    <script src="assets/js/theme.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta name="description" content="Turnstar Holdings Limited published FY2026 financial overview and illustrative rental portfolio demo.">
+  </head>
+  <body>
+    <a class="skip-link" href="#title">Skip to portfolio</a>
+    <aside class="sidebar offcanvas-lg offcanvas-start" id="portfolioSidebar" tabindex="-1" aria-labelledby="sidebarTitle">
+      <div class="offcanvas-header">
+        <h2 id="sidebarTitle">Portfolio navigation</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#portfolioSidebar" aria-label="Close navigation"></button>
+      </div>
+      <div class="offcanvas-body">
+        <a class="brand" href="index.html">
+        <span class="turnstar-wordmark">TURNSTAR<small>HOLDINGS LIMITED</small></span></a>
+        <div class="side-label">Workspace</div><button type="button" class="side-link" id="financialNav">Financial overview</button>
+        <button type="button" class="side-link" id="home">
+          <i class="bi bi-grid-1x2" aria-hidden="true"></i>
+          <span>Rental portfolio demo</span>
+        </button>
+        <div class="side-bottom">
+          <span class="avatar">TH</span>
+          <div>Management workspace<small>Portfolio demonstration</small></div>
+        </div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="app-header">
+        <button type="button" class="menu-button" id="menuToggle" data-bs-toggle="offcanvas" data-bs-target="#portfolioSidebar" aria-controls="portfolioSidebar" aria-label="Open portfolio navigation">
+          <i class="bi bi-list" aria-hidden="true"></i>
+        </button>
+        <div class="header-identity"><span class="header-title">Turnstar Holdings Limited</span></div>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" title="Switch to dark mode">
+          <i class="bi bi-moon-stars" aria-hidden="true"></i>
+        </button>
+      </header>
+      <main>
+        <section id="financialSection"></section><section id="rentalSection" hidden><div class="topline">
+          <nav id="breadcrumbs" aria-label="Breadcrumb"></nav>
+          <div class="toolbar-controls">
+            <button type="button" class="btn btn-light btn-sm" id="reset">
+              <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i> Reset
+            </button>
+          </div>
+        </div>
+        <div class="page-heading">
+          <h1 id="title" tabindex="-1">Turnstar Holdings Limited</h1>
+          <p id="subtitle">Rental demo reference date · 12 October 2026</p>
+        </div>
+        <nav id="entityNav" class="entity-pills" aria-label="Regional portfolio"></nav>
+        <p class="data-basis">Illustrative rental records · BWP-equivalent demo amounts · Demo portfolio: 12 property components</p><section id="tenantDetails" aria-label="Selected tenant or unit"></section>
+        <section id="kpis" class="kpi-grid" aria-label="Portfolio metrics"></section>
+        <section class="panel filters" aria-label="Portfolio filters">
+          <div class="filter-title">
+            <strong><i class="bi bi-sliders2" aria-hidden="true"></i> Portfolio filters</strong>
+            <button type="button" id="clear" class="text-button">Clear filters</button>
+          </div>
+          <div class="filter-grid" id="filters"></div>
+          <div id="chips" aria-label="Active filters"></div>
+        </section>
+        <div id="empty" role="status"></div>
+        <div class="chart-grid">
+          <section class="panel">
+            <div class="panel-heading">
+              <div><h2>Rental income by region</h2><p>Occupied monthly rental · select a bar to explore</p></div>
+              <span class="tag">BWP</span>
+            </div>
+            <div class="chart-wrap"><canvas id="entityChart"></canvas></div>
+            <div id="entitySummary" class="sr-summary"></div>
+          </section>
+          <section class="panel">
+            <div class="panel-heading">
+              <div><h2>Occupancy overview</h2><p>Occupied and vacant units in your selection</p></div>
+              <span class="tag" id="unitCount"></span>
+            </div>
+            <div class="occupancy-layout">
+              <div class="donut">
+                <canvas id="occupancyChart"></canvas>
+                <div id="occupancyCenter"></div>
+              </div>
+              <div id="occupancyLegend"></div>
+            </div>
+          </section>
+        </div>
+        <div class="chart-grid secondary">
+          <section class="panel">
+            <div class="panel-heading"><div><h2>Rental income by property</h2><p>Occupied monthly rental · select a bar to drill down</p></div></div>
+            <div class="chart-wrap property-chart"><canvas id="propertyChart"></canvas></div>
+            <div id="propertySummary" class="sr-summary"></div>
+          </section>
+          <section class="panel">
+            <div class="panel-heading"><div><h2>Lease expiry outlook</h2><p>Distinct periods from the reference date</p></div></div>
+            <div class="chart-wrap"><canvas id="leaseChart"></canvas></div>
+            <div id="leaseSummary" class="chart-caption"></div>
+          </section>
+        </div>
+        <section class="panel escalation-panel">
+          <div class="panel-heading">
+            <div><h2>Upcoming rental escalations</h2><p>Next 12 months · current rental remains unchanged</p></div>
+            <span class="tag">Schedule</span>
+          </div>
+          <div class="escalation-layout">
+            <div class="chart-wrap"><canvas id="escalationChart"></canvas></div>
+            <div id="escalationDetail" class="schedule"></div>
+          </div>
+        </section>
+        <section class="panel table-panel" aria-labelledby="scheduleTitle">
+          <div class="panel-heading">
+            <div><h2 id="scheduleTitle">Tenant rental schedule</h2><p id="tableCount" role="status" aria-live="polite"></p></div>
+            <div class="table-actions">
+              <label class="search-label"><i class="bi bi-search" aria-hidden="true"></i>
+                <input id="search" type="search" placeholder="Find a tenant or unit" aria-label="Search tenant rental schedule">
+              </label>
+              <button type="button" id="exportCsv" class="export-button" aria-describedby="exportFeedback">
+                <i class="bi bi-download" aria-hidden="true"></i> Export CSV
+              </button>
+            </div>
+          </div>
+          <p id="exportFeedback" class="export-feedback" role="status" aria-live="polite"></p>
+          <div class="scroll-hint" id="scrollHint"><i class="bi bi-arrow-left-right" aria-hidden="true"></i> Scroll horizontally to see all rental and lease details</div>
+          <div class="table-responsive" id="tableScroll" tabindex="0" role="region" aria-label="Scrollable tenant rental schedule">
+            <table class="table">
+              <caption class="visually-hidden">Filtered tenant rental schedule. Use a tenant details button to open its summary. Vacant amounts are asking amounts.</caption>
+              <thead><tr>
+                <th scope="col">Tenant / unit</th><th scope="col">Property</th>
+                <th scope="col">Rent</th><th scope="col">Levy</th>
+                <th scope="col">Parking / other</th><th scope="col">Total charges</th>
+                <th scope="col">Escalation</th><th scope="col">Next escalation</th>
+                <th scope="col">Lease expiry</th>
+              </tr></thead>
+              <tbody id="rows"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <label for="pageSize">Show <select id="pageSize"><option value="10">10</option><option value="25">25</option><option value="50">50</option></select> per page</label>
+            <div class="page-controls">
+              <span id="pageStatus"></span>
+              <button type="button" id="prevPage" aria-label="Previous page"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
+              <button type="button" id="nextPage" aria-label="Next page"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </section>
+        </section><footer>
+          <div>Turnstar Holdings Limited<small class="fictional-note">Published results and illustrative records are separate datasets</small></div>
+          <span>Designed &amp; created by Motswana Intelligence</span>
+        </footer>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/calculations.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script src="assets/js/dashboard.js"></script><script src="assets/js/financial.js"></script>
+  </body>
+</html>
