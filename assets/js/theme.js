@@ -10,7 +10,7 @@
     // Storage may be unavailable in private browsing or restricted contexts.
   }
 
-  const systemTheme = () => preference?.matches ? 'dark' : 'light';
+  const systemTheme = () => 'light';
   root.setAttribute('data-bs-theme', saved || systemTheme());
 
   function updateButton() {
