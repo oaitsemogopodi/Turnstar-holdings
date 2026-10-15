@@ -3,7 +3,7 @@
 Frontend-only HTML, Bootstrap 5, external CSS and vanilla JavaScript. No backend, APIs, database, authentication or live data. This workspace copy is the only project edited.
 
 ## Run
-Open index.html directly, or use VS Code Live Server. Bootstrap 5.3.3, Bootstrap Icons, Chart.js 4.4.7 and Montserrat load from CDNs and require internet access. Charts show a fallback if Chart.js cannot load. Run checks with node tests/export.test.cjs and node tests/data.test.cjs.
+Open index.html directly, or use VS Code Live Server. Bootstrap 5.3.3, Bootstrap Icons, Chart.js 4.4.7 and Manrope load from CDNs and require internet access. Charts show a fallback if Chart.js cannot load. Run checks with node tests/export.test.cjs and node tests/data.test.cjs.
 
 ## Published financial data
 Financial Overview opens by default. Seven cards always show consolidated Group results, in BWP, for the year ended 31 January 2026. Property and cash are reporting-date balances; other headline figures are annual flows. YoY is percentage change. Cash has no comparative because none was verified. Operating profit uses the supplied detailed consolidated statement definition, including exchange losses. Regional selection affects only rental revenue; other Group metrics are never allocated to fictional properties or tenants. Financial CSV includes all Group metrics and the selected regional rental figures with year, scope, unit, data basis and source URL.
@@ -21,3 +21,6 @@ The fixed calculation reference is 12 October 2026. Occupied leases have 36-mont
 Rental hierarchy: company → region → property/component → tenant/unit. A shared selection state sets parents and clears incompatible descendants. Occupancy, expiry and escalation filters combine using AND. Breadcrumbs clear descendants while retaining restrictions; Clear filters clears restrictions; Reset also clears hierarchy and table search. Table search is table-only and applies to CSV across all pages. Both exports use UTF-8 BOM, CSV escaping and formula-injection protection, preserving navigation, filters and theme. Theme preference uses turnstar-theme.
 
 See verification.md for executed checks and limitations, and design-notes.md for UI decisions.
+
+## Dashboard styling update
+The external assets/css/redesign.css stylesheet refines the shell, section heading actions, three-plus-four financial KPI layout, regional pills, grouped annual comparisons, contribution donut and financial summary table. Light remains the default; saved theme preferences and toggle remain available. Run node tests/presentation.test.cjs for focused presentation integration checks. See verification.md for browser QA limitations.

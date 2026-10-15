@@ -1,0 +1,300 @@
+
+/* Shared geometry: component corners are defined once for both themes. */
+:root {
+  --radius-workspace:32px;
+  --radius-card:20px;
+  --radius-kpi:18px;
+  --radius-control:12px;
+  --radius-small:10px;
+  --radius-pill:999px;
+  --radius-circle:50%;
+  --radius-bar:4px;
+  --surface-shadow:0 3px 12px rgba(23,54,93,.035);
+}
+:root[data-bs-theme="dark"] {
+  --surface-shadow:0 3px 12px rgba(0,0,0,.10);
+}
+
+/* Turnstar dashboard composition. UI palette, not an official brand standard. */
+:root[data-bs-theme="light"] {--bg:#F5F7FB;--card:#FFF;--line:#E1E7EF;--selected:#EAF3FC;--primary:#1676C5;--sidebar-surface:#17365D;--sidebar-ink:#F4F8FF;}
+:root[data-bs-theme="dark"] {--sidebar-surface:#121D30;--sidebar-ink:#F1F5F9;}
+body {font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;}
+.sidebar {width:232px;--bs-offcanvas-width:232px;background:var(--sidebar-surface)!important;color:var(--sidebar-ink);border-right:0;}
+.sidebar .offcanvas-body {padding:28px 16px 20px;}
+.sidebar .brand {padding:0 12px;margin-bottom:42px;}
+.sidebar .turnstar-wordmark {color:#FFF;font-size:24px;letter-spacing:1.5px;}
+.sidebar .turnstar-wordmark small {color:#B8CBE2;font-size:9px;letter-spacing:2.5px;}
+.sidebar .side-label {color:#ABC0D9;font-size:10px;letter-spacing:1.5px;margin:0 12px 12px;}
+.sidebar .side-link {color:#C9D8EB;padding:13px 12px;border-radius:var(--radius-control);margin-bottom:6px;gap:12px;font-weight:500;font-size:13px;}
+.sidebar .side-link:hover {background:#234974;color:#FFF;}
+.sidebar .side-link[aria-current="page"] {background:#1676C5;color:#FFF;box-shadow:none;}
+.sidebar .sources-link {margin-top:28px;}
+.sidebar .side-bottom {border-color:#385473;color:#DDE8F7;font-size:12px;}
+.sidebar .side-bottom small {color:#AFC3DD;}
+.sidebar .avatar {background:#2A4D76;color:#E8F3FF;}
+.sidebar .btn-close {filter:invert(1);}
+.workspace {min-width:0;}
+.app-header {background:var(--bg);border:0;box-shadow:none;padding:12px 24px;min-height:46px;height:auto;position:relative!important;}
+.header-identity {display:none;}
+main {padding:0 24px 24px;max-width:1600px;margin:auto;}
+.financial-heading,.page-heading {margin:0 0 22px;position:relative;}
+.financial-heading {align-items:center;gap:20px;}
+.financial-heading h1,.page-heading h1 {font-size:28px;line-height:1.2;letter-spacing:-.7px;font-weight:700;margin:0 0 8px;}
+.financial-heading p,.page-heading p {font-size:13px;color:var(--muted);margin:0;}
+.heading-separator {margin:0 9px;color:var(--strong-border);}
+.basis-inline {font-size:11px;}
+.heading-actions {display:flex;align-items:center;gap:10px;flex-shrink:0;}
+#rentalHeadingActions {float:right;}
+.export-button {border-radius:var(--radius-control);font-size:12px;padding:11px 15px;box-shadow:none;min-height:40px;}
+.theme-toggle {height:40px;width:40px;border-radius:var(--radius-control);background:var(--card);border:1px solid var(--line);color:var(--muted);}
+.kpi-grid {gap:14px;}
+.financial-kpis {margin-bottom:24px;}
+.financial-kpis .financial-card {grid-column:span 4;}
+.financial-kpis .financial-card:nth-child(n+4) {grid-column:span 3;}
+.financial-card.accent-blue,.financial-card.accent-indigo,.financial-card.accent-teal {--accent:var(--primary);--tint:var(--card);--icon-tint:var(--selected);}
+.financial-kpis .financial-card {background:var(--card);border:1px solid var(--line);box-shadow:0 2px 5px rgba(23,54,93,.025);padding:20px;border-radius:var(--radius-card);}
+.financial-card .kpi-label {color:var(--muted);font-size:12px;font-weight:500;}
+.financial-card .kpi-top > .bi {width:32px;height:32px;font-size:16px;border-radius:var(--radius-control);background:var(--selected);color:var(--primary);}
+.financial-card .kpi-value {font-size:30px;letter-spacing:-1px;margin:10px 0 5px;line-height:1.2;}
+.financial-kpis .financial-card:nth-child(n+4) .kpi-value {font-size:25px;}
+.financial-card .kpi-note {font-size:11px;}
+.financial-change {font-size:10px;margin-top:12px;padding:3px 7px;gap:4px;flex-wrap:wrap;}
+.financial-scope {display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px;flex-wrap:wrap;}
+.financial-scope .entity-pills,.financial-scope .data-basis {margin:0;}
+.financial-scope .data-basis {font-size:11px;max-width:310px;}
+.entity-pill {font-size:12px;min-height:34px;padding:7px 13px;border-radius:var(--radius-control);}
+.financial-layout {display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px;}
+.financial-layout > .panel {margin:0;}
+.performance-panel {grid-column:span 8;}
+.contribution-panel {grid-column:span 4;}
+.support-panel {grid-column:span 6;}
+.panel {border-radius:var(--radius-card);padding:22px;box-shadow:0 2px 6px rgba(23,54,93,.025);}
+.panel-heading {margin-bottom:20px;align-items:flex-start;gap:12px;}
+.panel-heading h2 {font-size:16px;font-weight:650;letter-spacing:-.25px;margin-bottom:6px;}
+.panel-heading p {font-size:12px;line-height:1.5;color:var(--muted);}
+.financial-chart {height:255px;}
+.performance-panel .financial-chart {height:320px;}
+.contribution-donut {height:185px;max-width:220px;margin:0 auto 12px;}
+.region-legend-row {display:flex;align-items:center;gap:10px;width:100%;padding:9px 0;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);text-align:left;font-size:12px;cursor:pointer;}
+.region-legend-row:last-child {border:0;}
+.region-legend-row:hover {background:var(--hover);}
+.region-legend-row small {display:block;color:var(--muted);font-size:10px;margin-top:3px;}
+.region-legend-row strong {margin-left:auto;font-size:13px;font-variant-numeric:tabular-nums;}
+.region-dot {width:9px;height:9px;border-radius:var(--radius-circle);flex-shrink:0;background:#1676C5;}
+.region-1 {background:#17365D;}.region-2 {background:#76AEDD;}
+:root[data-bs-theme="dark"] .region-0 {background:#69B8F5;}
+:root[data-bs-theme="dark"] .region-1 {background:#9AB8E1;}
+:root[data-bs-theme="dark"] .region-2 {background:#4793CE;}
+.financial-summary {margin-top:20px;}
+.financial-summary .table {min-width:620px;}
+.financial-summary th small {display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:4px;}
+.financial-summary td {text-align:right;}
+.financial-summary thead th:not(:first-child) {text-align:right;}
+.table {font-size:14px;font-variant-numeric:tabular-nums;}
+.table td,.table th {padding:15px 14px;}
+#rentalSection .table td:nth-child(n+3),#rentalSection .table thead th:nth-child(n+3) {text-align:right;}
+.table tbody tr:hover {background:var(--hover);}
+.table tbody tr.selected {background:var(--selected);}
+.topline {margin-bottom:12px;min-height:24px;}
+#breadcrumbs {font-size:11px;flex-wrap:wrap;}
+#rentalSection .data-basis {font-size:11px;margin:10px 0 18px;}
+#rentalSection > .chart-grid {grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:20px;}
+#rentalSection .kpi {background:var(--card);padding:20px;}
+#rentalSection .kpi-value {font-size:26px;}
+.tenant-sections {display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.financial-sources {padding:18px 22px;margin-top:20px;font-size:12px;}
+.financial-sources summary {font-size:13px;font-weight:600;cursor:pointer;}
+footer {font-size:11px;padding-top:24px;margin-top:12px;}
+button,a,select {transition:background-color .15s,border-color .15s,color .15s;}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible {outline:3px solid var(--primary);outline-offset:3px;}
+
+@media(max-width:1199px) {.financial-kpis .financial-card:nth-child(n) {grid-column:span 4;}.financial-kpis .financial-card:last-child {grid-column:span 12;}.financial-kpis .financial-card:nth-child(n) .kpi-value {font-size:25px;}.financial-scope .data-basis {max-width:none;}}
+@media(max-width:991px) {.workspace {margin-left:0;}.app-header {padding:12px 20px;}.financial-kpis .financial-card:nth-child(n) {grid-column:span 6;}.financial-kpis .financial-card:last-child {grid-column:span 12;}.performance-panel,.contribution-panel {grid-column:span 6;}.performance-panel .financial-chart {height:280px;}.region-legend-row {font-size:11px;}main {padding:0 20px 20px;}}
+@media(max-width:650px) {main {padding:0 14px 18px;}.app-header {padding:10px 14px;}.financial-heading h1,.page-heading h1 {font-size:24px;}.financial-heading {gap:14px;}.financial-heading p {max-width:240px;line-height:1.7;}.heading-separator {display:none;}.basis-inline {display:block;}.financial-kpis {gap:10px;}.financial-kpis .financial-card:nth-child(n) {padding:16px;grid-column:span 6;}.financial-kpis .financial-card:nth-child(n) .kpi-value {font-size:22px;}.financial-card .kpi-top > .bi {width:25px;height:25px;font-size:14px;}.financial-card .kpi-label {font-size:12px;}.financial-layout > .panel {grid-column:span 12;}.panel {padding:18px;}.financial-layout {gap:14px;}.performance-panel .financial-chart {height:250px;}.contribution-donut {height:180px;}.financial-scope {gap:10px;}#rentalSection > .chart-grid {grid-template-columns:1fr;}.tenant-sections {grid-template-columns:1fr;}.heading-actions {gap:7px;}#rentalHeadingActions {float:none;margin-bottom:14px;}.table-actions {flex-wrap:wrap;}.table-footer {gap:14px;flex-wrap:wrap;}footer {gap:12px;flex-wrap:wrap;}}
+@media(max-width:375px) {.financial-kpis .financial-card:nth-child(n) {grid-column:span 12;}.financial-heading h1 {font-size:23px;}}
+@media(prefers-reduced-motion:reduce) {button,a,select {transition:none!important;}html {scroll-behavior:auto!important;}}
+
+.financial-kpis {grid-template-columns:repeat(12,minmax(0,1fr));}
+@media(min-width:992px) {.financial-kpis .financial-card:nth-child(-n+3) {grid-column:span 4;}.financial-kpis .financial-card:nth-child(n+4) {grid-column:span 3;}}
+@media(max-width:991px) {.tenant-sections {grid-template-columns:1fr;}}
+
+@media(min-width:992px) and (max-width:1199px) {.financial-kpis .financial-card:nth-child(n+4) .kpi-value {font-size:22px;}}
+
+
+/* Sidebar motion and persistent navigation control. */
+.sidebar .offcanvas-body,.sidebar .offcanvas-header {background:var(--sidebar-surface);color:var(--sidebar-ink);}
+.app-header {position:sticky!important;top:0;z-index:30;min-height:68px;padding-top:12px;padding-bottom:12px;background:var(--bg);}
+.app-header .menu-button {display:inline-grid;place-items:center;width:44px;height:44px;min-height:44px;border:1px solid var(--line);border-radius:var(--radius-control);background:var(--card);color:var(--primary);padding:0;flex-shrink:0;box-shadow:0 2px 5px rgba(23,54,93,.04);cursor:pointer;transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .16s ease;}
+.app-header .menu-button:hover {background:var(--selected);border-color:var(--primary);box-shadow:0 3px 9px rgba(23,54,93,.08);}
+.app-header .menu-button:active {transform:scale(.96);box-shadow:none;}
+.app-header .menu-button:focus-visible {outline:3px solid var(--primary);outline-offset:4px;}
+.menu-glyph {display:flex;flex-direction:column;justify-content:center;gap:5px;width:20px;height:20px;}
+.menu-glyph > span {display:block;width:20px;height:2px;border-radius:var(--radius-bar);background:currentColor;transform-origin:center;transition:transform .28s cubic-bezier(.22,1,.36,1),width .28s cubic-bezier(.22,1,.36,1);}
+.menu-button[aria-expanded="true"] .menu-glyph > span:first-child {width:12px;transform:translate(-1px,3px) rotate(-45deg);}
+.menu-button[aria-expanded="true"] .menu-glyph > span:last-child {width:12px;transform:translate(-1px,-3px) rotate(45deg);}
+@media(min-width:992px) {
+  #portfolioSidebar {transform:translateX(0)!important;visibility:visible!important;transition:transform .28s cubic-bezier(.22,1,.36,1),visibility 0s;}
+  .workspace {transition:margin-left .28s cubic-bezier(.22,1,.36,1);}
+  body.sidebar-collapsed #portfolioSidebar {transform:translateX(-100%)!important;visibility:hidden!important;pointer-events:none;transition:transform .28s cubic-bezier(.22,1,.36,1),visibility 0s .28s;}
+  body.sidebar-collapsed .workspace {margin-left:0;}
+}
+@media(prefers-reduced-motion:reduce) {
+  #portfolioSidebar,.workspace,.menu-glyph > span,.app-header .menu-button {transition:none!important;}
+  .app-header .menu-button:active {transform:none;}
+}
+
+@media(min-width:992px) and (max-width:1199px) {.financial-kpis .financial-card:nth-child(n+4) .kpi-value {font-size:22px;}}
+
+/* The dashboard fills the viewport; only its inner sidebar junction is curved. */
+html,body {width:100%;min-width:0;}
+body {margin:0;padding:0;background:var(--sidebar-surface);}
+.dashboard-frame {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  width:100%;
+  min-width:0;
+  min-height:100dvh;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:var(--sidebar-surface);
+  box-shadow:none;
+}
+.dashboard-frame > .workspace {
+  min-width:0;
+  min-height:100dvh;
+  margin:0;
+  background:var(--bg);
+  border-radius:0;
+  border-top-left-radius:var(--radius-workspace);
+}
+.dashboard-frame .app-header {border-radius:var(--radius-workspace) 0 0 0;}
+.panel {border-radius:var(--radius-card);box-shadow:var(--surface-shadow);padding:24px;}
+.kpi,.financial-kpis .financial-card,#rentalSection .kpi {border-radius:var(--radius-kpi);box-shadow:var(--surface-shadow);}
+.filter select,select,input,.search-label,.search-label input {border-radius:var(--radius-control);}
+.btn,.export-button,.theme-toggle,.page-controls button,.sidebar .side-link,.app-header .menu-button {border-radius:var(--radius-control);}
+.entity-pill,.status-badge,.chip,.financial-change {border-radius:var(--radius-pill);}
+.financial-sources {padding:20px 24px;}
+@media(min-width:992px) {
+  .dashboard-frame {grid-template-columns:232px minmax(0,1fr);transition:grid-template-columns .28s cubic-bezier(.22,1,.36,1);}
+  .dashboard-frame > .sidebar.offcanvas-lg {
+    position:sticky;
+    inset:auto;
+    top:0;
+    align-self:start;
+    width:232px;
+    height:100dvh;
+    border:0;
+    border-radius:0;
+  }
+  .dashboard-frame .sidebar .offcanvas-body {border-radius:0;padding-top:32px;}
+  body.sidebar-collapsed .dashboard-frame {grid-template-columns:0 minmax(0,1fr);}
+  body.sidebar-collapsed .dashboard-frame > .workspace {border-top-left-radius:0;}
+  .dashboard-frame #portfolioSidebar {transform:none!important;clip-path:inset(0);opacity:1;transition:clip-path .28s cubic-bezier(.22,1,.36,1),opacity .2s ease,visibility 0s;}
+  body.sidebar-collapsed .dashboard-frame #portfolioSidebar {transform:none!important;clip-path:inset(0 100% 0 0);opacity:0;transition:clip-path .28s cubic-bezier(.22,1,.36,1),opacity .2s ease,visibility 0s .28s;}
+  .dashboard-frame > .workspace {transition:none;}
+}
+@media(max-width:991px) {
+  .dashboard-frame > .workspace,.dashboard-frame .app-header {border-radius:0;}
+  .sidebar.offcanvas-lg,.sidebar .offcanvas-header,.sidebar .offcanvas-body {border-radius:0;}
+}
+@media(max-width:650px) {
+  :root {--radius-card:18px;--radius-kpi:16px;}
+  .dashboard-frame .app-header {padding:12px 14px;}
+  .panel {padding:20px;}
+  .financial-sources {padding:18px 20px;}
+}
+@media(prefers-reduced-motion:reduce) {
+  .dashboard-frame,.dashboard-frame #portfolioSidebar,body.sidebar-collapsed .dashboard-frame #portfolioSidebar {transition:none!important;}
+}
+
+.table-panel .panel-heading {padding:0;}
+.table-panel .table-footer {padding:16px 0 0;}
+
+/* Use the header area for the active heading instead of an empty toolbar row. */
+.dashboard-frame .app-header {
+  height:0;
+  min-height:0;
+  padding:0;
+  border:0;
+  pointer-events:none;
+}
+.dashboard-frame .app-header .menu-button {
+  position:absolute;
+  left:24px;
+  top:24px;
+  pointer-events:auto;
+}
+.dashboard-frame main {max-width:none;padding-top:24px;}
+.financial-heading {min-height:54px;padding-left:62px;margin-bottom:22px;}
+.financial-heading > div:first-child {min-width:0;}
+#rentalSection .topline {min-height:44px;padding-left:62px;align-items:center;margin-bottom:18px;}
+#rentalSection .page-heading {margin-bottom:20px;}
+@media(max-width:991px) {
+  .dashboard-frame .app-header .menu-button {left:20px;top:20px;}
+  .dashboard-frame main {padding-top:20px;}
+}
+@media(max-width:650px) {
+  .dashboard-frame .app-header .menu-button {left:14px;top:18px;}
+  .dashboard-frame main {padding-top:18px;}
+  .financial-heading {display:grid;grid-template-columns:minmax(0,1fr);padding-left:58px;gap:12px;margin-bottom:18px;}
+  .financial-heading .heading-actions {flex-wrap:wrap;}
+  #rentalSection .topline {padding-left:58px;gap:8px;}
+}
+
+/* The floating sidebar arrow stays in place while its scroll visibility changes. */
+.app-header .menu-button {
+  opacity:1;
+  transition:opacity 180ms ease,transform 180ms ease,background-color .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+.app-header .menu-button.is-scroll-hidden {
+  opacity:0;
+  transform:translateY(-10px);
+  pointer-events:none;
+}
+@media(prefers-reduced-motion:reduce) {
+  .app-header .menu-button,.app-header .menu-button.is-scroll-hidden {transition:none!important;}
+}
+
+/* Shared Manrope type scale. The Turnstar wordmark retains its existing face. */
+:root {
+  --bs-body-font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --bs-font-sans-serif:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+body {font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;font-weight:400;line-height:1.55;letter-spacing:0;}
+.workspace,.sidebar,.offcanvas,button,input,select,textarea,.btn,.table {font-family:inherit;}
+button,input,select,textarea,.btn,.entity-pill,.side-link,.export-button,.theme-toggle,.page-controls button {font-weight:600;}
+.sidebar .turnstar-wordmark,.sidebar .turnstar-wordmark small {font-family:"Segoe UI",Arial,sans-serif;}
+.financial-heading h1,.page-heading h1,#title,#financialTitle {font-size:30px;font-weight:700;line-height:1.22;letter-spacing:-.025em;}
+.panel-heading h2,.tenant-summary h2,.financial-sources h2 {font-size:18px;font-weight:600;line-height:1.3;letter-spacing:-.015em;}
+.kpi-value,.financial-kpis .financial-card:nth-child(n) .kpi-value,#rentalSection .kpi .kpi-value {
+  font-size:clamp(28px,2.35vw,34px);
+  font-weight:700;
+  line-height:1.2;
+  letter-spacing:-.025em;
+  font-variant-numeric:tabular-nums lining-nums;
+}
+.kpi-label,.financial-card .kpi-label,.panel-heading p,.kpi-note,.financial-card .kpi-note,.data-basis,.financial-scope .data-basis,.chart-caption,.financial-change,.table-count,small {
+  font-size:clamp(12px,.85vw,13px);
+  line-height:1.5;
+}
+.table {font-size:14px;font-weight:400;}
+.table td:nth-child(n+3),.table th:nth-child(n+3),.financial-summary td,.kpi-value,.region-legend-row strong,.financial-change,.tenant-total strong {
+  font-variant-numeric:tabular-nums lining-nums;
+}
+.sidebar .side-link,.entity-pill,.export-button,.theme-toggle,.filter select,.filter input,.table-actions input,.page-controls button,.toolbar-controls button {font-size:14px;font-weight:600;letter-spacing:0;}
+.sidebar .side-link span,.panel-heading h2,.financial-heading h1,.page-heading h1 {overflow-wrap:anywhere;}
+@media(max-width:650px) {
+  .financial-heading h1,.page-heading h1,#title,#financialTitle {font-size:30px;}
+}
+@media(max-width:440px) {
+  .financial-kpis .financial-card:nth-child(n),#rentalSection .kpi-grid .kpi {grid-column:1 / -1;}
+  .financial-heading h1,.page-heading h1,#title,#financialTitle {font-size:28px;}
+  .financial-heading .heading-actions {grid-column:1;}
+}
+
+@media(min-width:992px) and (max-width:1199px) {
+  .financial-kpis .financial-card:nth-child(n) {grid-column:span 4;}
+  .financial-kpis .financial-card:last-child {grid-column:span 12;}
+}

@@ -34,6 +34,7 @@ function focusHeading() {
 
 function finishSelection(previousScope) {
   render();
+  window.dispatchEvent?.(new Event('dashboard:navigation'));
   const changed = previousScope !== scopeKey();
   const sidebar = el('portfolioSidebar');
   const offcanvas = window.bootstrap?.Offcanvas?.getInstance(sidebar);

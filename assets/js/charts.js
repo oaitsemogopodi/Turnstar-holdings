@@ -1,4 +1,25 @@
 const chartInstances = {};
+const chartFontFamily = '"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif';
+const pendingFontCharts = new Map();
+let chartFontLoaded = !document.fonts?.load;
+if (!chartFontLoaded) {
+  Promise.all([400, 500, 600, 700].map(weight => document.fonts.load(weight + ' 12px Manrope')))
+    .then(() => document.fonts.ready)
+    .catch(() => {}) // Font delivery failure uses the declared system fallback.
+    .then(() => {
+      chartFontLoaded = true;
+      const pending = [...pendingFontCharts.values()];
+      pendingFontCharts.clear();
+      pending.forEach(({ id, canvas, type, labels, values, options }) => {
+        if (document.getElementById(id) === canvas) drawChart(id, type, labels, values, options);
+      });
+      Object.values(chartInstances).forEach(chart => {
+        chart.resize?.();
+        chart.update('none');
+      });
+    });
+}
+
 const entityColors = { botswana: '#1676C5', tanzania: '#17365D', uae: '#76AEDD' };
 const darkEntityColors = { botswana: '#69B8F5', tanzania: '#9AB8E1', uae: '#4793CE' };
 const getEntityColor = id =>
@@ -31,9 +52,10 @@ function chartThemeColors() {
 
 function applyChartTheme() {
   const colors = chartThemeColors();
-  if (typeof Chart !== 'undefined') Chart.defaults.color = colors.muted;
+  if (typeof Chart !== 'undefined') { Chart.defaults.color = colors.muted; Chart.defaults.font.family = chartFontFamily; }
   Object.values(chartInstances).forEach(chart => {
     chart.options.color = colors.muted;
+    if(chart.options.plugins.legend?.labels)chart.options.plugins.legend.labels.color=colors.muted;
     const tooltip = chart.options.plugins.tooltip;
     tooltip.backgroundColor = colors.tooltip;
     tooltip.titleColor = colors.tooltipText;
@@ -91,7 +113,7 @@ function drawChart(id, type, labels, values, options = {}) {
   const canvas = document.getElementById(id);
   canvas.setAttribute('role', 'img');
   canvas.setAttribute('aria-label', labels.map((label, index) =>
-    label + ': ' + (options.currency ? money(values[index]) : values[index] + ' units')
+    label + ': ' + (options.series ? options.series.map(series=>series.label+' '+money(series.data[index])).join(', ') : options.currency ? money(values[index]) : values[index] + ' units')
   ).join('; '));
 
   if (chartInstances[id]) {
@@ -107,8 +129,13 @@ function drawChart(id, type, labels, values, options = {}) {
       'The chart library could not load. Portfolio figures remain available in the schedule.');
     return;
   }
+  if (!chartFontLoaded) {
+    pendingFontCharts.set(id, { id, canvas, type, labels, values, options });
+    chartEmptyState(canvas, 'Loading chart', 'Preparing dashboard typography.');
+    return;
+  }
   chartEmptyState(canvas, '', '');
-  Chart.defaults.font.family = 'Montserrat, Segoe UI, sans-serif';
+  Chart.defaults.font.family = chartFontFamily;
   Chart.defaults.font.size = 12;
   const theme = chartThemeColors();
   Chart.defaults.color = theme.muted;
@@ -149,7 +176,7 @@ function drawChart(id, type, labels, values, options = {}) {
     type,
     data: {
       labels,
-      datasets: [{
+      datasets: options.series ? options.series.map(series=>({...series,borderRadius:5,maxBarThickness:52,barPercentage:.7,categoryPercentage:.65})) : [{
         data: values,
         backgroundColor: options.colors || '#1676C5',
         borderWidth: options.selectedIndex == null ? 0 : values.map((_, index) => index === options.selectedIndex ? 2 : 0),
@@ -174,7 +201,7 @@ function drawChart(id, type, labels, values, options = {}) {
           ? { x: valueAxis, y: categoryAxis }
           : { x: categoryAxis, y: valueAxis } }),
       plugins: {
-        legend: { display: false },
+        legend: { display: !!options.series, position:'bottom', labels:{usePointStyle:true,pointStyle:'rectRounded',boxWidth:9,padding:20} },
         tooltip: {
           backgroundColor: theme.tooltip,
           titleColor: theme.tooltipText,
@@ -184,7 +211,7 @@ function drawChart(id, type, labels, values, options = {}) {
           displayColors: false,
           callbacks: {
             title: contexts => labels[contexts[0].dataIndex],
-            label: context => options.currency ? money(context.raw) : context.raw + ' units'
+            label: context => (context.dataset.label?context.dataset.label+': ':'')+(options.currency ? money(context.raw) : context.raw + ' units')
           }
         }
       },
