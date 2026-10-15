@@ -6,7 +6,7 @@ class Element {
  setAttribute(k,v){this.attributes[k]=v;}
  contains(node){return !!node&&(node.parent===this||this.children.some(c=>c.contains(node)));}
  append(...items){for(const item of items){if(item.parent)item.parent.children=item.parent.children.filter(c=>c!==item);item.parent=this;this.children.push(item);}}
- prepend(item){this.append(item);this.children=[item,...this.children.filter(c=>c!==item)];}
+ prepend(...items){this.append(...items);this.children=[...items,...this.children.filter(c=>!items.includes(c))];}
  focus(){this.focused=true;}scrollIntoView(){}
  set innerHTML(text){this.html=text;this.children=[];for(const match of text.matchAll(/id="([^"]+)"/g)){const child=new Element(match[1]);nodes.set(child.id,child);this.append(child);}this.regionButtons=[...text.matchAll(/data-region="([^"]*)"/g)].map(m=>{const b=new Element('region');b.dataset.region=m[1];return b;});}
  get innerHTML(){return this.html||'';}

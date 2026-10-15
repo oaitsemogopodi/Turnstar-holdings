@@ -298,3 +298,75 @@ button,input,select,textarea,.btn,.entity-pill,.side-link,.export-button,.theme-
   .financial-kpis .financial-card:nth-child(n) {grid-column:span 4;}
   .financial-kpis .financial-card:last-child {grid-column:span 12;}
 }
+/* Compact shared heading controls */
+.financial-heading,#rentalSection .page-heading {display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:24px;align-items:center;overflow:visible}
+.financial-heading > div:first-child {grid-column:1;min-width:0}
+.financial-heading .heading-actions {grid-column:2}
+#rentalSection .page-heading h1,#rentalSection .page-heading > p:not(.navigation-feedback) {grid-column:1}
+#rentalSection .page-heading h1 {grid-row:1}
+#rentalSection .page-heading > p:not(.navigation-feedback) {grid-row:2}
+#rentalHeadingActions {float:none;grid-column:2;grid-row:1 / 3;margin:0}
+#rentalSection .page-heading .navigation-feedback {grid-column:1 / -1;grid-row:3;margin-top:8px;color:var(--primary);font-size:12px}
+.heading-actions {min-width:0}
+.header-tools {display:flex;align-items:center;gap:10px;min-width:0}
+.header-icon {position:relative;display:inline-grid;place-items:center;flex:none;width:40px;height:40px;padding:0;border:1px solid var(--line);border-radius:var(--radius-control);background:var(--card);color:var(--muted);font:inherit;font-size:18px;cursor:pointer}
+.header-icon:hover,.header-icon[aria-expanded="true"] {border-color:var(--primary);color:var(--primary);background:var(--selected)}
+.header-icon:focus-visible,.global-search-field:focus-within,.global-search-option:focus-visible,.notification-row:focus-visible,.notification-head button:focus-visible,#globalSearchClear:focus-visible {outline:2px solid var(--primary);outline-offset:2px}
+.mobile-search-toggle {display:none}
+.global-search-wrap {position:relative;flex:none;width:clamp(280px,22vw,320px)}
+.global-search-field {height:46px;display:flex;align-items:center;gap:10px;padding:0 12px;border:1px solid var(--line);border-radius:13px;background:var(--card);color:var(--muted)}
+.global-search-field > .bi {font-size:16px;flex:none}
+.global-search-field input {width:100%;min-width:0;height:100%;border:0;outline:0;background:transparent;color:var(--ink,#17365d);font-size:13px;font-weight:500}
+.global-search-field input::placeholder {color:var(--muted);opacity:1}
+.global-search-field input::-webkit-search-cancel-button {display:none}
+#globalSearchClear {border:0;background:transparent;color:var(--muted);padding:4px;line-height:1}
+.global-search-results {position:absolute;z-index:100;top:calc(100% + 8px);right:0;width:min(390px,calc(100vw - 24px));max-height:min(420px,60dvh);overflow:auto;padding:8px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:0 8px 24px rgba(14,36,64,.12)}
+.global-search-group {padding:8px 10px 5px;color:var(--muted);font-size:11px;font-weight:700}
+.global-search-option {display:flex;align-items:flex-start;gap:12px;padding:9px 10px;border-radius:9px;cursor:pointer;color:var(--ink,#17365d)}
+.global-search-option:hover,.global-search-option[aria-selected="true"] {background:var(--selected);color:var(--primary)}
+.global-search-option > .bi {width:18px;flex:none;color:var(--primary)}
+.global-search-option span,.notification-row span {min-width:0}
+.global-search-option strong,.global-search-option small,.notification-row strong,.notification-row small {display:block;overflow-wrap:anywhere}
+.global-search-option strong,.notification-row strong {font-size:13px;font-weight:600}
+.global-search-option small,.notification-row small {color:var(--muted);font-size:12px;font-weight:400}
+.global-search-empty,.notification-empty {padding:18px 12px;color:var(--muted);font-size:13px}
+.notification-wrap {position:relative;flex:none}
+.notification-dot {position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#df633c;box-shadow:0 0 0 2px var(--card)}
+.notification-panel {position:fixed;z-index:110;max-height:min(520px,75dvh);overflow:auto;padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink,#17365d);box-shadow:0 8px 24px rgba(14,36,64,.12)}
+.notification-head {display:flex;justify-content:space-between;align-items:center;gap:10px}
+.notification-head h2 {margin:0;font-size:17px;font-weight:700}
+.notification-head button {border:0;background:none;color:var(--primary);font-size:12px;font-weight:600;padding:4px}
+.notification-head button:disabled {opacity:.45;cursor:default}
+.notification-basis {margin:5px 0 10px;color:var(--muted);font-size:12px}
+.notification-row {display:flex;align-items:flex-start;gap:11px;width:100%;padding:10px 8px;text-align:left;border:0;border-top:1px solid var(--line);background:transparent;color:inherit}
+.notification-row:hover,.notification-row:focus-visible {background:var(--selected)}
+.notification-row > .bi {flex:none;color:var(--primary);font-size:17px}
+.notification-row.unread strong::after {content:"";display:inline-block;width:6px;height:6px;margin-left:7px;border-radius:50%;background:var(--primary);vertical-align:middle}
+:root[data-bs-theme="dark"] .header-icon {color:var(--ink)}
+@media(max-width:1399px) {
+  .financial-heading,#rentalSection .page-heading {grid-template-columns:minmax(0,1fr)}
+  .financial-heading .heading-actions {grid-column:1;grid-row:2;margin-top:14px}
+  #rentalHeadingActions {grid-column:1;grid-row:3;margin-top:14px}
+  #rentalSection .page-heading .navigation-feedback {grid-row:4}
+}
+@media(max-width:650px) {
+  .financial-heading .heading-actions,#rentalHeadingActions {display:flex;flex-wrap:wrap}
+  .header-tools {display:contents}
+  .mobile-search-toggle {display:inline-grid}
+  .global-search-wrap {display:none;order:10;flex-basis:100%;width:100%}
+  .header-tools.mobile-search-open .global-search-wrap {display:block}
+  .global-search-results {left:0;right:auto;width:100%}
+  .notification-panel {max-height:70dvh}
+  .heading-actions .export-button {margin-left:auto}
+}
+
+.header-icon svg {width:20px;height:20px}
+.global-search-field > svg {width:18px;height:18px;flex:none}
+
+.notification-toggle > .bi {display:none}
+.header-tools.bootstrap-icons-ready .notification-toggle > .bi {display:block}
+.header-tools.bootstrap-icons-ready .notification-toggle > svg {display:none}
+
+#globalSearchClear svg {width:15px;height:15px;display:block}
+
+.global-search-option > svg,.notification-row > svg {width:18px;height:18px;flex:none;color:var(--primary)}

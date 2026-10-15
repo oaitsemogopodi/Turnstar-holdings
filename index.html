@@ -46,6 +46,21 @@
           <span class="menu-glyph" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
         <div class="header-identity"><span class="header-title">Turnstar Holdings Limited</span></div>
+        <div class="header-tools" id="headerTools">
+          <button type="button" class="header-icon mobile-search-toggle" id="mobileSearchToggle" aria-label="Open dashboard search" aria-controls="globalSearch" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
+          <div class="global-search-wrap" id="globalSearchWrap">
+            <div class="global-search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="globalSearch" type="search" role="combobox" aria-label="Search dashboard content" aria-autocomplete="list" aria-controls="globalSearchResults" aria-expanded="false" placeholder="Search properties, tenants or metrics&hellip;" autocomplete="off"><button type="button" id="globalSearchClear" aria-label="Clear dashboard search" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5 19 19M19 5 5 19"/></svg></button></div>
+            <div id="globalSearchResults" class="global-search-results" role="listbox" hidden></div>
+          </div>
+          <div class="notification-wrap">
+            <button type="button" class="header-icon notification-toggle" id="notificationToggle" aria-label="Notifications" aria-controls="notificationPanel" aria-expanded="false" title="Notifications"><i class="bi bi-bell" aria-hidden="true"></i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 9h18c0-1-3-2-3-9Z"/><path d="M10 21h4"/></svg><span class="notification-dot" id="notificationDot" hidden></span></button>
+            <section class="notification-panel" id="notificationPanel" aria-label="Notifications" hidden>
+              <div class="notification-head"><h2>Notifications</h2><button type="button" id="markNotificationsRead">Mark all as read</button></div>
+              <p class="notification-basis">Demo lease alerts &middot; Reference <span id="notificationReference"></span></p>
+              <div id="notificationList"></div>
+            </section>
+          </div>
+        </div>
         <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" title="Switch to dark mode">
           <i class="bi bi-moon-stars" aria-hidden="true"></i>
         </button>
@@ -60,8 +75,8 @@
           </div>
         </div>
         <div class="page-heading">
-          <div class="heading-actions" id="rentalHeadingActions"></div><h1 id="title" tabindex="-1">Turnstar Holdings Limited</h1>
-          <p id="subtitle">Rental demo reference date</p>
+          <h1 id="title" tabindex="-1">Turnstar Holdings Limited</h1>
+          <p id="subtitle">Rental demo reference date</p><div class="heading-actions" id="rentalHeadingActions"></div><p id="navigationFeedback" class="navigation-feedback" role="status" hidden></p>
         </div>
         <nav id="entityNav" class="entity-pills" aria-label="Regional portfolio"></nav>
         <p class="data-basis">Illustrative rental records · BWP-equivalent demo amounts · Demo portfolio: 12 property components</p><section id="tenantDetails" aria-label="Selected tenant or unit"></section>
@@ -168,6 +183,6 @@
     <script src="assets/js/sidebar.js"></script><script src="assets/js/data.js"></script>
     <script src="assets/js/calculations.js"></script>
     <script src="assets/js/charts.js"></script>
-    <script src="assets/js/dashboard.js"></script><script src="assets/js/financial.js"></script><script src="assets/js/back-button-visibility.js"></script>
+    <script src="assets/js/dashboard.js"></script><script src="assets/js/financial.js"></script><script src="assets/js/header-tools.js"></script><script src="assets/js/back-button-visibility.js"></script>
   </body>
 </html>

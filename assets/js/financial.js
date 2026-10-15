@@ -21,7 +21,7 @@ function financialCard(metric,index) {
   const accents=Array(7).fill('blue');
   const change=metric.previous===undefined?null:(metric.current/metric.previous-1)*100;
   const badge=change===null?'neutral':change===0?'neutral':metric.name==='Finance costs'?(change>0?'attention':'positive'):(change>0?'positive':'attention');
-  return `<article class="kpi financial-kpi financial-card accent-${accents[index]}">
+  return `<article class="kpi financial-kpi financial-card accent-${accents[index]}" data-metric-index="${index}">
     <div class="kpi-top"><span class="kpi-label">${metric.name}</span><i class="bi bi-${icons[index]}" aria-hidden="true"></i></div>
     <div class="kpi-value" title="${money(metric.current)}">P ${(metric.current/1000000).toFixed(2)}m</div>
     <div class="kpi-note">Group · ${metric.balance?'As at 31 Jan 2026':'Annual flow'}</div>
@@ -52,7 +52,7 @@ function renderFinancial() {
   const selected=regionalRevenue.find(r=>r.name===financialRegion);
   const annual=selected||financialMetrics[0];
   const panel=(id,title,note,cls='')=>'<section class="panel '+cls+'"><div class="panel-heading"><div><h2>'+title+'</h2><p>'+note+'</p></div></div><div class="chart-wrap financial-chart"><canvas id="'+id+'"></canvas></div></section>';
-  if(el('financialSection').contains(el('themeToggle')))document.querySelector('.app-header').append(el('themeToggle'));
+  for(const id of ['headerTools','themeToggle']) { const node=el(id); if(node&&el('financialSection').contains(node)) document.querySelector('.app-header').append(node); }
   el('financialSection').innerHTML=`
     <div class="financial-heading"><div><h1 tabindex="-1" id="financialTitle">Financial overview</h1><p>Year ended 31 January 2026 <span class="heading-separator">/</span> <span class="basis-inline">Published FY2026 results</span></p></div><div class="heading-actions" id="financialHeadingActions"><button class="export-button" id="exportFinancial"><i class="bi bi-download" aria-hidden="true"></i> Export CSV</button></div></div>
     <section class="kpi-grid financial-kpis" aria-label="Group financial metrics">${financialMetrics.map(financialCard).join('')}</section>
@@ -72,7 +72,7 @@ function renderFinancial() {
   drawChart('financialRegions','doughnut',regionalRevenue.map(r=>r.name),regionalRevenue.map(r=>r.current),{currency:true,colors:['#1676C5','#17365D','#76AEDD'],entityIds:['botswana','tanzania','uae'],onSelect:index=>{financialRegion=regionalRevenue[index].name;renderFinancial();}});
   drawChart('financialProfit','bar',['Operating profit','Profit after tax'],[184415767,50707188],{currency:true,series:[{label:'FY2025',data:[185866894,140683580],backgroundColor:'#A8CDEE'},{label:'FY2026',data:[184415767,50707188],backgroundColor:'#1676C5'}]});
   drawChart('financialProperty','bar',['31 Jan 2025','31 Jan 2026'],[2792036806,2576575186],{currency:true,colors:['#A8CDEE','#1676C5']});
-  if(section==='financial')el('financialHeadingActions').prepend(el('themeToggle'));
+  if(section==='financial') { const tools=el('headerTools'); if(tools)el('financialHeadingActions').prepend(tools,el('themeToggle')); else el('financialHeadingActions').prepend(el('themeToggle')); }
   window.dispatchEvent?.(new Event('dashboard:navigation'));
 }
 function showSection(next) {
@@ -80,7 +80,7 @@ function showSection(next) {
   el('financialSection').hidden=next!=='financial'; el('rentalSection').hidden=next!=='rental';
   el('financialNav').setAttribute('aria-current',next==='financial'?'page':'false');
   el('home').setAttribute('aria-current',next==='rental'?'page':'false');
-  if(next==='financial')renderFinancial();else { render(); el('rentalHeadingActions').append(el('themeToggle'),el('exportCsv')); }
+  if(next==='financial')renderFinancial();else { render(); el('rentalHeadingActions').append(...(el('headerTools')?[el('headerTools')]:[]),el('themeToggle'),el('exportCsv')); }
   el('skipLink').href=next==='financial'?'#financialTitle':'#title';
   window.dispatchEvent?.(new Event('dashboard:navigation'));
   window.bootstrap?.Offcanvas?.getInstance(el('portfolioSidebar'))?.hide();
